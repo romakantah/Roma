@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday Ghofrane — from romankanta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#ff7eb3;
+      --bg2:#7afcff;
+      --card-bg: rgba(255,255,255,0.06);
+      --card-hover: rgba(255,255,255,0.12);
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.85);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%; margin:0; padding:0; font-family:'Poppins',system-ui,-apple-system,'Segoe UI',Roboto,Arial;}
+    body{
+      background: linear-gradient(135deg,var(--bg1),var(--bg2));
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow:hidden;
+      min-height:100vh;
+    }
+
+    /* tiled kawaii background (SVG data URI) */
+    .pattern-bg{
+      position:fixed;
+      inset:0;
+      background-image: url("data:image/svg+xml;utf8,\
+        <svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'>\
+        <defs><style>.c{fill:%23fff;stroke:%23000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.p{fill:%23ffb3d1}.y{fill:%23ffd36a}</style></defs>\
+        <rect width='160' height='160' fill='none'/>\
+        <g transform='translate(18,14) scale(0.78)'>\
+          <path class='c' d='M24 6c-7 0-12 6-12 13s5 13 12 13 12-6 12-13-5-13-12-13z'/>\
+          <circle class='c' cx='16' cy='22' r='2'/>\
+          <circle class='c' cx='28' cy='22' r='2'/>\
+          <ellipse class='y' cx='22' cy='30' rx='3' ry='2'/>\
+          <path class='p' d='M32 8c0 6-5 10-11 10s-11-4-11-10c0-2 3-4 5-4 2-1 4-1 6 0 2 0 6 2 11 4z'/>\
+        </g>\
+        <g transform='translate(98,18) scale(0.72)'>\
+          <path class='c' d='M24 6c-7 0-12 6-12 13s5 13 12 13 12-6 12-13-5-13-12-13z'/>\
+          <circle class='c' cx='16' cy='22' r='2'/>\
+          <circle class='c' cx='28' cy='22' r='2'/>\
+          <ellipse class='y' cx='22' cy='30' rx='3' ry='2'/>\
+          <path class='p' d='M32 8c0 6-5 10-11 10s-11-4-11-10c0-2 3-4 5-4 2-1 4-1 6 0 2 0 6 2 11 4z'/>\
+        </g>\
+        <g transform='translate(18,98) scale(0.74)'>\
+          <path class='c' d='M24 6c-7 0-12 6-12 13s5 13 12 13 12-6 12-13-5-13-12-13z'/>\
+          <circle class='c' cx='16' cy='22' r='2'/>\
+          <circle class='c' cx='28' cy='22' r='2'/>\
+          <ellipse class='y' cx='22' cy='30' rx='3' ry='2'/>\
+          <path class='p' d='M32 8c0 6-5 10-11 10s-11-4-11-10c0-2 3-4 5-4 2-1 4-1 6 0 2 0 6 2 11 4z'/>\
+        </g>\
+        <g transform='translate(96,96) scale(0.7)'>\
+          <path class='c' d='M24 6c-7 0-12 6-12 13s5 13 12 13 12-6 12-13-5-13-12-13z'/>\
+          <circle class='c' cx='16' cy='22' r='2'/>\
+          <circle class='c' cx='28' cy='22' r='2'/>\
+          <ellipse class='y' cx='22' cy='30' rx='3' ry='2'/>\
+          <path class='p' d='M32 8c0 6-5 10-11 10s-11-4-11-10c0-2 3-4 5-4 2-1 4-1 6 0 2 0 6 2 11 4z'/>\
+        </g>\
+        </svg>");
+      background-repeat: repeat;
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+      mix-blend-mode: screen;
+    }
+
+    .container{
+      position:relative;
+      z-index:1;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px;
+    }
+
+    .card{
+      width:100%;
+      max-width:920px;
+      border-radius:18px;
+      padding:28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      box-shadow: 0 18px 50px rgba(0,0,0,0.25);
+      backdrop-filter: blur(6px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .page{
+      display:none;
+      width:100%;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      gap:10px;
+      animation:fade 0.5s ease;
+      padding:12px;
+    }
+    @keyframes fade{ from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:none} }
+    .active{ display:flex; }
+    .emoji{ font-size:3rem; margin-bottom:6px; }
+    h1{ margin:6px 0; font-size:clamp(1.6rem, 3.2vw, 2.4rem); color:var(--muted) }
+    p{ max-width:800px; color: rgba(255,255,255,0.95); line-height:1.6; margin:0; font-size:clamp(0.98rem,1.2vw,1.05rem) }
+
+    .btn{
+      margin-top:20px;
+      background:var(--card-bg);
+      padding:12px 26px;
+      border-radius:14px;
+      color:var(--text);
+      font-weight:700;
+      cursor:pointer;
+      border:none;
+      position:relative;
+      transition:transform .12s ease, background .12s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .btn:hover{ transform: translateY(-3px); background:var(--card-hover); }
+    .btn:active{ transform: translateY(-1px); }
+    .btn small{ font-weight:600; color: rgba(255,255,255,0.95) }
+
+    /* small kawaii icon in the top-right of each button */
+    .btn .kawaii{
+      position:absolute;
+      top:-10px;
+      right:-10px;
+      width:44px;
+      height:44px;
+      pointer-events:none;
+      transform: translate(12%, -8%);
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.18));
+    }
+    .controls{ position:absolute; right:18px; top:18px; display:flex; gap:10px; z-index:2 }
+    .icon-btn{ background:rgba(255,255,255,0.06); border-radius:10px; padding:8px; border:none; color:var(--text); cursor:pointer }
+
+    .dots{ display:flex; gap:8px; margin-top:12px }
+    .dot{ width:10px; height:10px; border-radius:50%; background: rgba(255,255,255,0.18) }
+    .dot.active{ background: rgba(255,255,255,0.95); width:14px; height:10px; border-radius:10px }
+
+    /* confetti canvas */
+    #confetti-canvas{
+      position:fixed; inset:0; pointer-events:none; z-index:3;
+    }
+
+    /* play overlay (shown when user needs to interact to allow audio) */
+    .play-overlay{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.5));
+      z-index:4;
+    }
+    .play-overlay .play-panel{
+      background: rgba(255,255,255,0.06);
+      padding:20px 28px;
+      border-radius:12px;
+      text-align:center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    }
+    .play-overlay .play-btn{
+      margin-top:12px;
+      background:var(--card-bg);
+      padding:10px 18px;
+      border-radius:12px;
+      color:var(--text);
+      font-weight:700;
+      border:none;
+      cursor:pointer;
+    }
+
+    @media (max-width:560px){
+      .card{ padding:18px; border-radius:14px }
+      .emoji{ font-size:2.6rem }
+      .btn{ padding:10px 18px }
+      .btn .kawaii{ width:36px; height:36px; top:-8px; right:-8px }
+    }
+
+    /* Respect user preference for reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .page { animation: none !important; }
+      .btn, .icon-btn { transition: none !important; }
+      :root { --confetti-disabled: 1; }
+    }
+
+    /* small-screen confetti limit hint (no direct effect but used by JS) */
+    @media (max-width:420px) {
+      :root { --small-screen: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="pattern-bg" aria-hidden="true"></div>
+
+  <div class="container" role="application" aria-label="Birthday card">
+    <div class="card" role="group" aria-label="Card content">
+      <!-- Page 1 -->
+      <section class="page active" id="page1" aria-labelledby="p1title" tabindex="0">
+        <div class="emoji" aria-hidden="true">💙💜</div>
+        <h1 id="p1title">Happy Birthday, Ghofrane</h1>
+        <p>Today’s your day, so I made something small but special for you.</p>
+        <button type="button" class="btn" id="openBtn" onclick="startExperience()" aria-label="Open the card">
+          <span>Open</span>
+          <!-- kawaii icon styled after image 1 -->
+          <svg class="kawaii" viewBox="0 0 64 64" aria-hidden="true">
+            <defs></defs>
+            <g fill="none" stroke="#3b2b24" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path fill="#fff" d="M32 10c-7 0-12 6-12 13s5 13 12 13 12-6 12-13-5-13-12-13z"/>
+              <circle fill="#3b2b24" cx="24" cy="31" r="2"/>
+              <circle fill="#3b2b24" cx="40" cy="31" r="2"/>
+              <ellipse fill="#ffd36a" cx="32" cy="38" rx="3" ry="2"/>
+              <path fill="#ffb3d1" d="M44 22c0 6-5 10-11 10s-11-4-11-10c0-2 3-4 5-4 2-1 4-1 6 0 0 0 6 2 11 4z"/>
+            </g>
+          </svg>
+        </button>
+        <div class="dots" aria-hidden="true"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      </section>
+
+      <!-- Page 2 -->
+      <section class="page" id="page2" aria-labelledby="p2title" tabindex="0">
+        <div class="emoji" aria-hidden="true">🍕🌮🏀</div>
+        <h1 id="p2title">Little Things About You</h1>
+        <p>You love food more than anything (except vegetables 😭). Pizza is your forever favourite, tacos are your weakness, and you still find time to hoop and be good at studying.</p>
+        <button type="button" class="btn" onclick="nextPage()" aria-label="Next">
+          <span>Next</span>
+          <!-- kawaii icon in top-right styled after image 4 -->
+          <svg class="kawaii" viewBox="0 0 64 64" aria-hidden="true">
+            <g stroke="#2a2a2a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path fill="#fff" d="M32 8c-7 0-12 6-12 13s5 13 12 13 12-6 12-13-5-13-12-13z"/>
+              <circle fill="#000" cx="23" cy="29" r="2"/>
+              <circle fill="#000" cx="41" cy="29" r="2"/>
+              <path fill="#ff6b6b" d="M42 18c0 4-4 7-10 7s-10-3-10-7c0-1 2-3 4-3 2-1 4-1 6 0 2 0 8 1 10 3z"/>
+            </g>
+          </svg>
+        </button>
+        <div class="dots" aria-hidden="true"><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      </section>
+
+      <!-- Page 3 -->
+      <section class="page" id="page3" aria-labelledby="p3title" tabindex="0">
+        <div class="emoji" aria-hidden="true">📘✨</div>
+        <h1 id="p3title">Your Talent</h1>
+        <p>You casually got 20/20 in math. Not many people do that. You’re genuinely gifted, even when you don’t try.</p>
+        <button type="button" class="btn" onclick="nextPage()" aria-label="Next">
+          <span>Next</span>
+          <!-- kawaii icon styled after image 2 -->
+          <svg class="kawaii" viewBox="0 0 64 64" aria-hidden="true">
+            <g stroke="#2b2b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path fill="#fff" d="M32 10c-7 0-12 6-12 13s5 13 12 13 12-6 12-13-5-13-12-13z"/>
+              <circle fill="#000" cx="23" cy="30" r="2"/>
+              <circle fill="#000" cx="41" cy="30" r="2"/>
+              <path fill="#ffb6db" d="M32 38c2 0 3-1 3-1 0 0 7-3 9-8 0 0-11 2-12 2s-12-2-12-2c2 5 9 8 12 9z"/>
+            </g>
+          </svg>
+        </button>
+        <div class="dots" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+      </section>
+
+      <!-- Page 4 -->
+      <section class="page" id="page4" aria-labelledby="p4title" tabindex="0">
+        <div class="emoji" aria-hidden="true">💫💙</div>
+        <h1 id="p4title">A Soft Message</h1>
+        <p>You have this calm, comforting vibe that makes everything lighter. Anyone who knows you is lucky — even in small moments.</p>
+        <button type="button" class="btn" onclick="nextPage()" aria-label="Next">
+          <span>Next</span>
+          <!-- kawaii icon styled after image 3 -->
+          <svg class="kawaii" viewBox="0 0 64 64" aria-hidden="true">
+            <g stroke="#2c2c2c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path fill="#fff" d="M32 8c-7 0-12 6-12 13s5 13 12 13 12-6 12-13-5-13-12-13z"/>
+              <circle fill="#000" cx="24" cy="30" r="2"/>
+              <circle fill="#000" cx="40" cy="30" r="2"/>
+              <path fill="#ff8fc7" d="M32 20c2 0 4 0 6 1 3 1 5 4 5 6-4-1-6-2-11-2s-8 1-12 2c0-2 1-4 4-6 3-1 6-1 8-1z"/>
+            </g>
+          </svg>
+        </button>
+        <div class="dots" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span></div>
+      </section>
+
+      <!-- Page 5 -->
+      <section class="page" id="page5" aria-labelledby="p5title" tabindex="0">
+        <div class="emoji" aria-hidden="true">🎂💜</div>
+        <h1 id="p5title">For You</h1>
+        <p>
+          I just wanted to wish you a peaceful and very happy birthday.<br><br>
+          Even though things aren’t the same between us anymore, I still appreciate the moments and conversations we shared — they meant something to me.<br><br>
+          You’ve always had a calm, genuine energy that made things feel lighter. I hope today you feel celebrated and peaceful.<br><br>
+          Happy birthday, Ghofrane.<br><br>
+          — romankanta
+        </p>
+        <button type="button" class="btn" onclick="restart()" aria-label="Close">
+          <span>Close</span>
+          <!-- reuse icon 1 for final -->
+          <svg class="kawaii" viewBox="0 0 64 64" aria-hidden="true">
+            <g stroke="#3b2b24" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path fill="#fff" d="M24 6c-7 0-12 6-12 13s5 13 12 13 12-6 12-13-5-13-12-13z"/>
+              <circle fill="#3b2b24" cx="24" cy="31" r="2"/>
+              <circle fill="#3b2b24" cx="40" cy="31" r="2"/>
+              <ellipse fill="#ffd36a" cx="32" cy="38" rx="3" ry="2"/>
+              <path fill="#ffb3d1" d="M44 22c0 6-5 10-11 10s-11-4-11-10c0-2 3-4 5-4 2-1 4-1 6 0 0 0 6 2 11 4z"/>
+            </g>
+          </svg>
+        </button>
+        <div class="dots" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span></div>
+      </section>
+    </div>
+
+    <div class="controls" aria-hidden="false">
+      <button type="button" id="playToggle" class="icon-btn" title="Play / Pause music" aria-pressed="false" aria-label="Play or pause music">►</button>
+    </div>
+
+    <div class="play-overlay" id="overlay" aria-hidden="true">
+      <div class="play-panel" role="dialog" aria-modal="true" aria-labelledby="overlayTitle">
+        <h2 id="overlayTitle" style="margin:0 0 8px 0; color:var(--muted); font-size:1.05rem;">Tap to play music</h2>
+        <p style="margin:0; color:rgba(255,255,255,0.95); max-width:340px">Your browser requires a user interaction to start audio. Tap play to continue the card with music.</p>
+        <button type="button" class="play-btn" id="overlayPlay" onclick="overlayPlay()" aria-label="Play music and continue">Play music &amp; continue</button>
+        <div style="margin-top:8px;">
+          <button type="button" class="play-btn" style="background:transparent; border:1px solid rgba(255,255,255,0.06); margin-top:8px;" onclick="overlaySkip()" aria-label="Continue without music">Continue without music</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="confetti-canvas" width="1" height="1" aria-hidden="true"></canvas>
+
+  <!-- audio uses your Drive direct-download link ; preload metadata reduces network cost on load -->
+  <audio id="music" src="https://drive.google.com/uc?export=download&id=1-ZmL5_MQq6c2e8L0mkyTCuYcL_zC4JF7" preload="metadata"></audio>
+
+  <!-- screen-reader live region to announce page changes -->
+  <div id="sr-live" aria-live="polite" style="position:fixed; left:-10000px; width:1px; height:1px; overflow:hidden;"></div>
+
+  <script>
+    // pages & UI
+    const pages = Array.from(document.querySelectorAll('.page'));
+    const dots  = Array.from(document.querySelectorAll('.dot'));
+    let current = 0;
+    let audio = document.getElementById('music');
+    const overlay = document.getElementById('overlay');
+    const overlayPlayBtn = document.getElementById('overlayPlay');
+    const playToggleBtn = document.getElementById('playToggle');
+    const live = document.getElementById('sr-live');
+
+    // detect reduced motion
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // UTILS
+    function focusElement(el){
+      try { el.focus({preventScroll:true}); } catch(e) { if (el && el.focus) el.focus(); }
+    }
+
+    function announce(text){
+      live.textContent = text || '';
+    }
+
+    function showPage(index){
+      pages.forEach((p,i)=> {
+        p.classList.toggle('active', i===index);
+        if(i===index) focusElement(p);
+      });
+      dots.forEach((d,i)=> d.classList.toggle('active', i===index));
+      current = index;
+
+      // announce current title for screen readers
+      const title = pages[index].querySelector('h1')?.textContent || '';
+      announce(title + ' — page ' + (index+1) + ' of ' + pages.length);
+
+      // confetti control
+      if(index === pages.length-1 && !prefersReducedMotion) {
+        startConfetti();
+      } else {
+        stopConfetti();
+      }
+      updatePlayButton();
+    }
+
+    function nextPage(){ showPage(Math.min(current+1, pages.length-1)); }
+    function restart(){ showPage(0); try { audio.currentTime = 0; } catch(e){} }
+
+    // Start experience: move forward and attempt to play audio
+    async function startExperience(){
+      nextPage();
+      try {
+        await audio.play();
+        updatePlayButton();
+      } catch(err){
+        // autoplay blocked — show overlay to get user interaction
+        showOverlay();
+      }
+    }
+
+    function showOverlay(){
+      overlay.style.display = 'flex';
+      overlay.setAttribute('aria-hidden','false');
+      // focus the primary control for keyboard users
+      setTimeout(()=> {
+        if (overlayPlayBtn && typeof overlayPlayBtn.focus === 'function') overlayPlayBtn.focus();
+      }, 50);
+    }
+
+    async function overlayPlay(){
+      try {
+        await audio.play();
+        overlay.style.display = 'none';
+        overlay.setAttribute('aria-hidden','true');
+        updatePlayButton();
+      } catch(e){
+        // fallback: try switching to a local file (if you have one) or warn
+        console.warn('Audio play failed, trying fallback src or waiting for user gesture', e);
+        try {
+          // set a fallback file (if you host Birthday.mp3 next to the page)
+          if (audio) {
+            audio.src = './Birthday.mp3';
+            // we don't auto-play again here; user may need to click Play
+          } else {
+            // create a new audio element (defensive)
+            const alt = document.createElement('audio');
+            alt.id = 'music';
+            alt.src = './Birthday.mp3';
+            alt.preload = 'metadata';
+            document.body.appendChild(alt);
+            audio = alt;
+          }
+        } catch (err2) {
+          console.warn('Fallback audio assignment failed', err2);
+        }
+        // keep overlay visible so user can explicitly press the button
+        overlay.style.display = 'flex';
+      }
+    }
+
+    function overlaySkip(){
+      overlay.style.display = 'none';
+      overlay.setAttribute('aria-hidden','true');
+      updatePlayButton();
+    }
+
+    async function togglePlay(){
+      if (!audio) {
+        console.warn('No audio element present');
+        showOverlay();
+        return;
+      }
+      if (audio.paused) {
+        try {
+          await audio.play();
+          updatePlayButton();
+        } catch(e){
+          showOverlay();
+        }
+      } else {
+        audio.pause();
+        updatePlayButton();
+      }
+    }
+
+    function updatePlayButton(){
+      const isPlaying = audio && !audio.paused && !audio.ended;
+      playToggleBtn.textContent = isPlaying ? '❚❚' : '►';
+      playToggleBtn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
+    }
+
+    if (playToggleBtn) playToggleBtn.addEventListener('click', togglePlay);
+
+    audio.addEventListener('play', updatePlayButton);
+    audio.addEventListener('pause', updatePlayButton);
+    audio.addEventListener('ended', updatePlayButton);
+    audio.addEventListener('error', () => {
+      // mark audio unavailable and keep overlay visible if open
+      console.warn('Audio failed to load/play; user may need to host file elsewhere.');
+      if (overlay.style.display === 'flex') {
+        // overlay already visible; let user interact
+      }
+    });
+
+    // keyboard navigation
+    window.addEventListener('keydown', (e) => {
+      const tag = document.activeElement && document.activeElement.tagName && document.activeElement.tagName.toLowerCase();
+      if(e.key === 'ArrowRight') nextPage();
+      if(e.key === 'ArrowLeft') showPage(Math.max(0, current-1));
+      if((e.key === ' ' || e.key === 'Spacebar') && !['button','input','textarea','a'].includes(tag)) {
+        e.preventDefault();
+        togglePlay();
+      }
+      // ESC closes overlay
+      if (e.key === 'Escape' && overlay.style.display === 'flex') {
+        overlaySkip();
+      }
+    });
+
+    showPage(0);
+
+    // -- Simple confetti (lightweight, mobile-safe)
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    let confetti = [];
+    let confettiRunning = false;
+    let rafId = null;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function createConfettiPiece() {
+      const colors = ['#ff7eb3', '#7afcff', '#ffd36a', '#ffffff'];
+      return {
+        x: Math.random() * canvas.width,
+        y: -10,
+        r: Math.random() * 6 + 4,
+        d: Math.random() * 40 + 10,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        tilt: Math.random() * 10 - 10,
+        tiltAngle: 0
+      };
+    }
+
+    function startConfetti() {
+      if (confettiRunning) return;
+      confettiRunning = true;
+      confetti = [];
+      const max = window.innerWidth < 420 ? 40 : 80;
+      for (let i = 0; i < max; i++) confetti.push(createConfettiPiece());
+      animateConfetti();
+    }
+
+    function stopConfetti() {
+      confettiRunning = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function animateConfetti() {
+      if (!confettiRunning) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      confetti.forEach((p, i) => {
+        ctx.beginPath();
+        ctx.fillStyle = p.color;
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        p.y += Math.cos(p.d) + 1.5;
+        p.x += Math.sin(p.d);
+        p.tiltAngle += 0.1;
+
+        if (p.y > canvas.height + 20) {
+          confetti[i] = createConfettiPiece();
+        }
+      });
+
+      rafId = requestAnimationFrame(animateConfetti);
+    }
+  </script>
+</body>
+</html>
